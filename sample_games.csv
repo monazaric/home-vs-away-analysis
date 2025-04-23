@@ -1,3 +1,13 @@
-GameID,Date,Opponent,Location,Points,FG%,Turnovers
-001,2024-11-04,UMass,Home,71,35.6,12
-002,2024-11-07,Indiana,Away,72,40.9,16
+GameID,Date,Opponent,Location,Points,FG%,Turnovers,Steals,PersonalFouls,Assists
+001,2024-11-04,UMass,Home,71,35.6,16,19,13,15
+002,2024-11-07,Indiana,Away,72,40.9,18,14,32,11
+003,2024-11-10,Quinnipiac,Away,53,30.5,17,12,25,10
+004,2024-11-14,Boston College,Home,78,37.5,22,5,16,13
+005,2024-11-17,Maine,Away,83,52.7,7,17,20,16
+006,2024-11-19,Northeastern,Home,89,56.3,11,14,16,22
+007,2024-11-23,Northwestern,Away,75,38.1,13,7,17,17
+008,2024-11-24,Illinois St.,Away,72,44.9,9,20,13
+009,2024-11-27,Stony Brook,Away,60,40.4,8,13,14,16
+010,2024-11-28,St.John's(NY),Away,54,36.8,18,7,15,6
+011,2024-12-07,Rhode Island,Home,60,42.3,9,10,11,8
+012,2024-12-21,Boston College,Home,86,43.8,24,11,12
