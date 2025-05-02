@@ -1,73 +1,103 @@
 import pandas as pd
 
-# Load your dataset
-df = pd.read_csv("sample_games.csv")  
+# Load dataset
+df = pd.read_csv("season_games.csv")
 
-# Split into Home and Away games
-home = df[df['Location'] == 'Home']
-away = df[df['Location'] == 'Away']
-
-# Select only numeric/stat columns (excluding Game ID, Date, Location, and Opponent)
+# Select numeric/stat columns, excluding GameID
 stat_columns = df.select_dtypes(include='number').columns
-
-# Exclude GameID
 stat_columns = [col for col in stat_columns if col != "GameID"]
 
-# Calculate averages
-home_avg = home[stat_columns].mean().round(2)
-away_avg = away[stat_columns].mean().round(2)
+# Lower-is-better stats
+lower_is_better = ['Turnovers', 'Personal Fouls']
 
-# Decide which stats are better when LOWER
-lower_is_better = ['Turnovers', 'PersonalFouls']
+# Ask user for comparison type
+mode = input("Would you like to compare ALL games or SELECT games? (Enter 'all' or 'select'): ").strip().lower()
 
-# Let user decide which stats they want compared
-print("Choose a stat to compare:")
-print("1. Points")
-print("2. FG%")
-print("3. Turnovers")
-print("4. Steals")
-print("4. Personal Fouls")
-print("5. Assists")
-choice = input("Enter number: ")
-
-stat_map = {"1": "Points", "2": "FG%", "3": "Turnovers","4": "Steals","5": "Personal Fouls","6": "Assists"}
-stat = stat_map.get(choice)
-
-if stat:
-    avg_home = df[df["Location"] == "Home"][stat].mean()
-    avg_away = df[df["Location"] == "Away"][stat].mean()
-    print(f"{stat} - Home: {avg_home:.2f}, Away: {avg_away:.2f}")
-else:
-    print("Invalid choice.")
-
-# Stats to compare
-stats_to_compare = ["Points", "FG%", "Turnovers", "Steals", "PersonalFouls"]
-
-# Print results
-print("Home Averages:")
-print(home_avg)
-print("\nAway Averages:")
-print(away_avg)
-
-print("\nWho performed better?")
-for stat in stats_to_compare:
-    home_value = home_avg.get(stat)
-    away_value = away_avg.get(stat)
+if mode == 'select':
+    # Show available games
+    print("\nAvailable games:")
+    for idx, row in df.iterrows():
+        print(f"{row['GameID']}: Opponent: {row['Opponent']}, Location: {row['Location']}, Date: {row['Date']}")
     
-    if pd.notna(home_value) and pd.notna(away_value):
-        if stat in lower_is_better:
-            if home_value < away_value:
-                print(f"{stat}: Home performed better")
-            elif away_value < home_value:
-                print(f"{stat}: Away performed better")
-            else:
-                print(f"{stat}: Performance was equal")
-        else:
-            if home_value > away_value:
-                print(f"{stat}: Home performed better")
-            elif away_value > home_value:
-                print(f"{stat}: Away performed better")
-            else:
-                print(f"{stat}: Performance was equal")
+    # Ask for selected GameIDs (comma-separated)
+    selected_ids = input("\nEnter the GameIDs of the games you'd like to compare (separated by commas): ")
+    selected_ids = [int(id.strip()) for id in selected_ids.split(',') if id.strip().isdigit()]
+    
+    selected_games = df[df['GameID'].isin(selected_ids)]
+    
+    if selected_games.empty:
+        print("No valid games selected.")
     else:
-        print(f"{stat}: Insufficient data for comparison")
+        # Split selected games into Home and Away
+        home = selected_games[selected_games['Location'] == 'Home']
+        away = selected_games[selected_games['Location'] == 'Away']
+        
+        # Calculate averages
+        home_avg = home[stat_columns].mean().round(2)
+        away_avg = away[stat_columns].mean().round(2)
+        
+        print("\nSelected Home Game Averages:")
+        print(home_avg)
+        
+        print("\nSelected Away Game Averages:")
+        print(away_avg)
+        
+        # Compare selected games
+        print("\nWho performed better?")
+        for stat in stat_columns:
+            home_value = home_avg.get(stat)
+            away_value = away_avg.get(stat)
+            
+            if pd.notna(home_value) and pd.notna(away_value):
+                if stat in lower_is_better:
+                    if home_value < away_value:
+                        print(f"{stat}: Home performed better")
+                    elif away_value < home_value:
+                        print(f"{stat}: Away performed better")
+                    else:
+                        print(f"{stat}: Performance was equal")
+                else:
+                    if home_value > away_value:
+                        print(f"{stat}: Home performed better")
+                    elif away_value > home_value:
+                        print(f"{stat}: Away performed better")
+                    else:
+                        print(f"{stat}: Performance was equal")
+            else:
+                print(f"{stat}: Insufficient data for comparison")
+else:
+    # Use existing ALL games logic
+    home = df[df['Location'] == 'Home']
+    away = df[df['Location'] == 'Away']
+    
+    home_avg = home[stat_columns].mean().round(2)
+    away_avg = away[stat_columns].mean().round(2)
+    
+    print("\nHome Averages:")
+    print(home_avg)
+    
+    print("\nAway Averages:")
+    print(away_avg)
+    
+    print("\nWho performed better?")
+    for stat in stat_columns:
+        home_value = home_avg.get(stat)
+        away_value = away_avg.get(stat)
+        
+        if pd.notna(home_value) and pd.notna(away_value):
+            if stat in lower_is_better:
+                if home_value < away_value:
+                    print(f"{stat}: Home performed better")
+                elif away_value < home_value:
+                    print(f"{stat}: Away performed better")
+                else:
+                    print(f"{stat}: Performance was equal")
+            else:
+                if home_value > away_value:
+                    print(f"{stat}: Home performed better")
+                elif away_value > home_value:
+                    print(f"{stat}: Away performed better")
+                else:
+                    print(f"{stat}: Performance was equal")
+        else:
+            print(f"{stat}: Insufficient data for comparison")

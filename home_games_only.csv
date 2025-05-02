@@ -4,3 +4,10 @@ GameID,Date,Opponent,Location,Points,FG%,Turnovers,Steals,PersonalFouls,Assists
 006,2024-11-19,Northeastern,Home,89,56.3,11,14,16,22
 011,2024-12-07,Rhode Island,Home,60,42.3,9,10,11,8
 012,2024-12-21,Boston College,Home,86,43.8,24,11,12
+015,2025-01-18,Brown,Home,83,45.5,14,9,14,11
+017,2025-01-25,Yale,Home,91,58.3,7,12,12,11
+018,2025-01-31,Columbia,Home,71,45.8,18,7,16,6
+019,2025-02-01,Cornell,Home,72,41.3,9,3,23,13
+020,2025-02-08,Dartmouth,Home,66,45.8,13,9,15,14
+024,2025-02-28,Princeton,Home,58,38.9,11,11,22,7
+025,2025-03-01,Penn,Home,60,41.7,11,13,13,10

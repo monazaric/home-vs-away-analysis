@@ -9,8 +9,6 @@ Features
 
 Statistical Analysis: Compare key performance metrics such as Points Per Game (PPG), Field Goal Percentage (FG%), Turnovers (TOs), and more.
 
-Data Visualization: Generate graphs and charts to highlight trends and differences.
-
 1. Data Collection
 
 Obtain game performance data from publicly available datasets, APIs, or manually recorded stats.
@@ -24,18 +22,11 @@ Calculate averages and standard deviations for key metrics (PPG, FG%, TOs, etc.)
 
 Compute the differences in performance between home and away games.
 
-3. Data Visualization
+User can choose and input games they are interested in analyzing.
 
-Create bar charts to compare team and player statistics at home vs. away.
 
-Use box plots to illustrate distributions and variability.
-
-Implement scatter plots to explore correlations between variables.
-
-4. Interpretation & Conclusions
+3. Interpretation & Conclusions
 
 Identify patterns and trends that suggest home-court advantages or disadvantages.
 
-Discuss potential external factors (e.g., travel fatigue, crowd influence, refereeing bias).
 
-Suggest areas for further research or dataset expansion.
